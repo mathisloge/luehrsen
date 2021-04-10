@@ -10,8 +10,8 @@
     },
     "devDependencies": {},
     "scripts": {
-        "build": "npx tailwindcss build styles.css -o root/style.css -c tailwind.config.js",
-        "build:prod": "set NODE_ENV=production&& npx tailwindcss build styles.css -o root/style.css -c tailwind.config.js && node minify.js"
+        "build": "npx tailwindcss build styles.css -o style.css -c tailwind.config.js",
+        "build:prod": "set NODE_ENV=production&& npx tailwindcss build styles.css -o style.css -c tailwind.config.js && node minify.js"
     },
     "author": "Mathis Logemann",
     "license": "MIT"

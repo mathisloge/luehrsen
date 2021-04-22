@@ -1,6 +1,7 @@
 module.exports = {
     purge: [
-        './src/*.html'
+        './src/**/*.html',
+        './src/**/*.ts'
     ],
     theme: {
         fontFamily: {

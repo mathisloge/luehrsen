@@ -13,13 +13,28 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.css$/i,
+                test: /\.css$/,
                 use: [
-                    "style-loader",
-                    "css-loader",
-                    "postcss-loader"
-                ]
-            }
+                    { loader: MiniCssExtractPlugin.loader },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1,
+                            modules: false,
+                            sourceMap: true,
+                        },
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                ident: 'postcss',
+                                plugins: [require('tailwindcss'), require('autoprefixer')],
+                            }
+                        },
+                    },
+                ],
+            },
         ],
     },
     plugins: [
@@ -30,17 +45,23 @@ module.exports = {
                 'viewport': 'width=device-width, initial-scale=1, shrink-to-fit=no',
             },
             title: "Live. Laugh. Luersen."
-        })
+        }),
+        new MiniCssExtractPlugin()
     ],
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
     },
     output: {
-        filename: 'bundle.js',
+        filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
     },
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         port: 8080,
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+        },
     },
 };

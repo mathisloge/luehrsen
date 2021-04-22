@@ -20,10 +20,8 @@ export default class Game {
 
         const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
         const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
-        console.log(vw, vh);
         this.options.cellsX = Math.floor(vw / this.options.cellSize);
         this.options.cellsY = Math.floor(vh / this.options.cellSize);
-        console.log(this.options.cellsX);
         this.update();
     }
 
@@ -32,9 +30,9 @@ export default class Game {
         this.canvas.height = this.options.cellsY * this.options.cellSize;
 
         this.matrix = new Array(this.options.cellsX);
-        for (var x = 0; x < this.matrix.length; x++) {
+        for (let x = 0; x < this.matrix.length; x++) {
             this.matrix[x] = new Array(this.options.cellsY);
-            for (var y = 0; y < this.matrix[x].length; y++) {
+            for (let y = 0; y < this.matrix[x].length; y++) {
                 this.matrix[x][y] = false;
             }
         }
@@ -49,15 +47,14 @@ export default class Game {
 
     }
     private step() {
-        var x, y;
-        var buffer = new Array(this.matrix.length);
-        for (x = 0; x < buffer.length; x++) {
+        let buffer = new Array(this.matrix.length);
+        for (let x = 0; x < buffer.length; x++) {
             buffer[x] = new Array(this.matrix[x].length);
         }
 
         // calculate one step
-        for (x = 0; x < this.matrix.length; x++) {
-            for (y = 0; y < this.matrix[x].length; y++) {
+        for (let x = 0; x < this.matrix.length; x++) {
+            for (let y = 0; y < this.matrix[x].length; y++) {
                 // count neighbours
                 var neighbours = this.countNeighbours(x, y);
 
@@ -111,10 +108,10 @@ export default class Game {
     }
 
     private countNeighbours(cx: number, cy: number) {
-        var count = 0;
+        let count = 0;
 
-        for (var x = cx - 1; x <= cx + 1; x++) {
-            for (var y = cy - 1; y <= cy + 1; y++) {
+        for (let x = cx - 1; x <= cx + 1; x++) {
+            for (let y = cy - 1; y <= cy + 1; y++) {
                 if (x == cx && y == cy)
                     continue;
                 if (x < 0 || x >= this.matrix.length || y < 0 || y >= this.matrix[x].length)
@@ -127,8 +124,8 @@ export default class Game {
     }
 
     private randomize() {
-        for (var x = 0; x < this.matrix.length; x++) {
-            for (var y = 0; y < this.matrix[x].length; y++) {
+        for (let x = 0; x < this.matrix.length; x++) {
+            for (let y = 0; y < this.matrix[x].length; y++) {
                 this.matrix[x][y] = Math.random() < 0.3;
             }
         }
